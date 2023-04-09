@@ -87,6 +87,7 @@ function FilmLibrary() {
               value={year}
               onChange={handleYear}
             >
+              <option>2023</option>
               <option>2022</option>
               <option>2021</option>
               <option>2020</option>
