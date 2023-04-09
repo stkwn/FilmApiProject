@@ -76,90 +76,83 @@ function FilmLibrary() {
 
   return (
     <>
-      {films.length === 0 ? (
-        <div className="FilmLibrary">
-          <div className="film-list">
-            <h1 className="section-title">FILMS</h1>
-            <form className="section-year">
-              <label for="release_year">Release Year </label>
-              <select
-                name="release_year"
-                id="release_year"
-                value={year}
-                onChange={handleYear}
-              >
-                <option>2022</option>
-                <option>2021</option>
-                <option>2020</option>
-                <option>2019</option>
-                <option>2018</option>
-                <option>2017</option>
-              </select>
-            </form>
-            <div className="film-list-filters">
-              <button
-                className={`film-list-filter ${showAll && "is-active"}`}
-                onClick={handleShowAll}
-              >
-                ALL
-                <span className="section-count">{films.length}</span>
-              </button>
-              <button
-                className={`film-list-filter ${showFaves && "is-active"}`}
-                onClick={handleShowFaves}
-              >
-                FAVES
-                <span className="section-count">{favesFilm.length}</span>
-              </button>
-            </div>
-            {showAll
-              ? films.map((film) => {
-                  let isFaves = -1;
-                  if (favesFilm.find((item) => item.id === film.id))
-                    isFaves = 1;
-                  return (
-                    <FilmRow
-                      key={film.id}
-                      film={film}
-                      // onFilmSelect={() => handleFilmSelect(film.id)}
-                      onFavaesFilmSelect={() => handleFavesFilmSelect(film)}
-                      isFaves={isFaves}
-                    />
-                  );
-                })
-              : favesFilm.map((film) => {
-                  let isFaves = 1;
-                  return (
-                    <FilmRow
-                      key={film.id}
-                      film={film}
-                      // onFilmSelect={() => handleFilmSelect(film)}
-                      onFavaesFilmSelect={() => handleFavesFilmSelect(film)}
-                      isFaves={isFaves}
-                    />
-                  );
-                })}
-            <button className="film-button" onClick={() => handlePage("prev")}>
-              Prev Page
+      <div className="FilmLibrary">
+        <div className="film-list">
+          <h1 className="section-title">FILMS</h1>
+          <form className="section-year">
+            <label for="release_year">Release Year </label>
+            <select
+              name="release_year"
+              id="release_year"
+              value={year}
+              onChange={handleYear}
+            >
+              <option>2022</option>
+              <option>2021</option>
+              <option>2020</option>
+              <option>2019</option>
+              <option>2018</option>
+              <option>2017</option>
+            </select>
+          </form>
+          <div className="film-list-filters">
+            <button
+              className={`film-list-filter ${showAll && "is-active"}`}
+              onClick={handleShowAll}
+            >
+              ALL
+              <span className="section-count">{films.length}</span>
             </button>
             <button
-              className="film-button is-active"
-              onClick={() => handlePage("next")}
+              className={`film-list-filter ${showFaves && "is-active"}`}
+              onClick={handleShowFaves}
             >
-              Next Page
+              FAVES
+              <span className="section-count">{favesFilm.length}</span>
             </button>
           </div>
-          <div className="film-details">
-            <h1 className="section-title">DETAILS</h1>
-            {/* <FilmDetail film={selectedFilm}/> */}
-            <FilmDetail />
-          </div>
+          {showAll
+            ? films.map((film) => {
+                let isFaves = -1;
+                if (favesFilm.find((item) => item.id === film.id)) isFaves = 1;
+                return (
+                  <FilmRow
+                    key={film.id}
+                    film={film}
+                    // onFilmSelect={() => handleFilmSelect(film.id)}
+                    onFavaesFilmSelect={() => handleFavesFilmSelect(film)}
+                    isFaves={isFaves}
+                  />
+                );
+              })
+            : favesFilm.map((film) => {
+                let isFaves = 1;
+                return (
+                  <FilmRow
+                    key={film.id}
+                    film={film}
+                    // onFilmSelect={() => handleFilmSelect(film)}
+                    onFavaesFilmSelect={() => handleFavesFilmSelect(film)}
+                    isFaves={isFaves}
+                  />
+                );
+              })}
+          <button className="film-button" onClick={() => handlePage("prev")}>
+            Prev Page
+          </button>
+          <button
+            className="film-button is-active"
+            onClick={() => handlePage("next")}
+          >
+            Next Page
+          </button>
         </div>
-      ) : (
-        <div>
-          <Link to="/">Return Home</Link>
+        <div className="film-details">
+          <h1 className="section-title">DETAILS</h1>
+          {/* <FilmDetail film={selectedFilm}/> */}
+          <FilmDetail />
         </div>
-      )}
+      </div>
     </>
   );
 }
